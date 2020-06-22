@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: cartservice
-          image: derkkila/cart_microservice
+          image: k8tan/cart_microservice
           imagePullPolicy: Always
           ports:
             - name: cartservice

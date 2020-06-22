@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ordersservice
-          image: derkkila/orders_microservice
+          image: k8tan/orders_microservice
           imagePullPolicy: Always
           ports:
             - name: ordersservice

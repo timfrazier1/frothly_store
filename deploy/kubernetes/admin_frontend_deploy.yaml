@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: adminfrontend
-          image: derkkila/admin_frontend
+          image: k8tan/admin_frontend
           imagePullPolicy: Always
           ports:
             - name: adminfrontend

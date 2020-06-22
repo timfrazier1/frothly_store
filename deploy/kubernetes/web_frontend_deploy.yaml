@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: webfrontend
-          image: derkkila/web_frontend
+          image: k8tan/web_frontend
           imagePullPolicy: Always
           ports:
             - name: webfrontend

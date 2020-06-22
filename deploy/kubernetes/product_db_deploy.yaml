@@ -18,8 +18,8 @@ spec:
     spec:
       containers:
         - name: productdb
-          #image: derkkila/product_db
-          image: derkkila/product_db:latest
+          #image: k8tan/product_db
+          image: k8tan/product_db:latest
           imagePullPolicy: Always
           ports:
             - name: mysql

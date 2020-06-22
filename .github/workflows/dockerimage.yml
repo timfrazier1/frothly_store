@@ -18,7 +18,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: derkkila/admin_frontend
+          repository: k8tan/admin_frontend
           tags: latest
           tag_with_sha: true
           path: admin_frontend
@@ -34,7 +34,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: derkkila/cart_db
+          repository: k8tan/cart_db
           tags: latest
           tag_with_sha: true
           path: cart_db
@@ -50,7 +50,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: derkkila/cart_microservice
+          repository: k8tan/cart_microservice
           tags: latest
           tag_with_sha: true
           path: cart_microservice
@@ -66,7 +66,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: derkkila/orders_db
+          repository: k8tan/orders_db
           tags: latest
           tag_with_sha: true
           path: orders_db
@@ -82,7 +82,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: derkkila/orders_microservice
+          repository: k8tan/orders_microservice
           tags: latest
           tag_with_sha: true
           path: orders_microservice
@@ -98,7 +98,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: derkkila/product_db
+          repository: k8tan/product_db
           tags: latest
           tag_with_sha: true
           path: product_db
@@ -114,7 +114,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: derkkila/product_microservice
+          repository: k8tan/product_microservice
           tags: latest
           tag_with_sha: true
           path: product_microservice
@@ -130,7 +130,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: derkkila/web_frontend
+          repository: k8tan/web_frontend
           tags: latest
           tag_with_sha: true
           path: web_frontend

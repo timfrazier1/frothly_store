@@ -7,7 +7,7 @@ router.use(require('cookie-parser')());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('error', { message: 'Buttercup Games Root' });
+  res.render('error', { message: 'Frothly Web Store Root' });
 });
 
 router.get('/shop', function(req, res, next) {
@@ -23,7 +23,7 @@ router.get('/shop', function(req, res, next) {
 
     }
 
-  res.render('index', { title: 'Buttercup Games' });
+  res.render('index', { title: 'Frothly Web Store' });
 });
 
 router.get('/shop/cart', function(req, res, next) {

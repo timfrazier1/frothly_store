@@ -31,6 +31,15 @@ VALUES ("A Beginner's Guide to Kubernetes Monitoring","Application container tec
   <li>How to monitor Kubernetes deployments</li>
   </ul>","book","education",11.99,10000);
 
+INSERT INTO product_list (name,description,type,category,price,qty)
+VALUES ("Frothly Logo Sticker","When you really need to represent Premium Quality.<br /><br />
+Get some premium quality stickers at a non-premium price.  Represent your favorite home brewing store with pride! <br />
+<ul>
+<li>3 in x 3 in square size</li>
+<li>Won\'t peel off once stuck</li>
+<li>Sold in packs of 5</li>", "sticker","merch",3.99,100);
+
+
 CREATE TABLE product_images
 (
 id INTEGER,
@@ -43,3 +52,6 @@ VALUES (1,"primary_image","/wstatic/images/a-beginners-guide-to-collectd.png");
 
 INSERT INTO product_images (id,imgname,filepath)
 VALUES (2,"primary_image","/wstatic/images/a-beginners-guide-to-collectd.png");
+
+INSERT INTO product_images (id,imgname,filepath)
+VALUES (3,"primary_image","/wstatic/images/FrothlyLogo.jpg");

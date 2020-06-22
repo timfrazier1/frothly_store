@@ -34,12 +34,10 @@ jobs:
         mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
         aws-iam-authenticator help
         
-    - name: Set Kubeconfig
+    - name: Set Kubeconfig and deploy to EKS
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       run: |     
         echo ${KUBE_CONFIG_DATA} | base64 -d > kubeconfig
         export KUBECONFIG=kubeconfig
-
-    - name: Deploy to EKS cluster
-      run: kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/admin_frontend_deploy.yaml
+        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/admin_frontend_deploy.yaml

@@ -5,13 +5,13 @@ metadata:
   name: productdb
   labels:
     name: productdb
-  namespace: buttercup-store
+  namespace: frothly-store
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: buttercup-store
+        app: frothly-store
         name: productdb
         role: mysql
         tier: db

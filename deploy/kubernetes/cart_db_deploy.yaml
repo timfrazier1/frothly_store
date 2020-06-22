@@ -5,13 +5,13 @@ metadata:
   name: cartdb
   labels:
     name: cartdb
-  namespace: buttercup-store
+  namespace: frothly-store
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: buttercup-store
+        app: frothly-store
         name: cartdb
         role: mysql
         tier: db

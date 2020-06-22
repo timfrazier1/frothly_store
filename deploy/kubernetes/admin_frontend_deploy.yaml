@@ -3,13 +3,13 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: adminfrontend
-  namespace: buttercup-store
+  namespace: frothly-store
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: buttercup-store
+        app: frothly-store
         name: adminfrontend
         role: adminfrontend
         tier: client

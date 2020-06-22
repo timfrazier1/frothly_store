@@ -5,7 +5,7 @@ metadata:
   name: ordersdb
   labels:
     name: ordersdb
-  namespace: buttercup-store
+  namespace: frothly-store
 spec:
   ports:
     # the port that this service should serve on
@@ -24,9 +24,9 @@ spec:
 #kind: Service
 #metadata:
 #  name: productdb
-#  namespace: buttercup-store
+#  namespace: frothly-store
 #  labels:
-#    app: buttercup-store
+#    app: frothly-store
 #    tier: db
 #spec:
 #  type: LoadBalancer

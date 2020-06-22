@@ -1,13 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: "buttercup-ingress"
-  namespace: "buttercup-store"
+  name: "frothly-ingress"
+  namespace: "frothly-store"
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
+    #alb.ingress.kubernetes.io/inbound-cidrs: 
+    alb.ingress.kubernetes.io/security-groups: HttpOnlyEks
+    # Have not tested this yet, but adding per spec:
+    alb.ingress.kubernetes.io/load-balancer-attributes: access_logs.s3.enabled=true,access_logs.s3.bucket=frothly-store-access-logs    
   labels:
-    app: buttercup-store
+    app: frothly-store
 spec:
   rules:
   - http:

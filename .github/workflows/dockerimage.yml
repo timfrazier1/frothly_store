@@ -35,7 +35,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f deploy/kubernetes/admin_frontend_deploy.yaml
+          args: apply -f https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/admin_frontend_deploy.yaml
           
   cart_db:
     runs-on: ubuntu-latest
@@ -65,7 +65,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f deploy/kubernetes/cart_db_deploy.yaml
+          args: apply -f https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/cart_db_deploy.yaml
           
   cart_microservice:
     runs-on: ubuntu-latest
@@ -95,7 +95,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f deploy/kubernetes/cart_microservice_deploy.yaml
+          args: apply -f https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/cart_microservice_deploy.yaml
           
   orders_db:
     runs-on: ubuntu-latest
@@ -125,7 +125,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f deploy/kubernetes/orders_db_deploy.yaml
+          args: apply -f https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/orders_db_deploy.yaml
 
   orders_microservice:
     runs-on: ubuntu-latest
@@ -155,7 +155,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f deploy/kubernetes/orders_microservice_deploy.yaml
+          args: apply -f https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/orders_microservice_deploy.yaml
 
   product_db:
     runs-on: ubuntu-latest
@@ -185,7 +185,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f deploy/kubernetes/product_db_deploy.yaml
+          args: apply -f https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/product_db_deploy.yaml
 
   product_microservice:
     runs-on: ubuntu-latest
@@ -215,7 +215,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f deploy/kubernetes/product_microservice_deploy.yaml
+          args: apply -f https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/product_microservice_deploy.yaml
 
           
   web_frontend:
@@ -246,4 +246,4 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f deploy/kubernetes/web_frontend_deploy.yaml
+          args: apply -f https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/web_frontend_deploy.yaml

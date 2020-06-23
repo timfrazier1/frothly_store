@@ -9,7 +9,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "deploy_to_eks"
-  deploy_to_eks:
+  update_eks_deployment:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -30,27 +30,12 @@ jobs:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       run: |
         echo $GITHUB_WORKSPACE
+        pwd
         curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator
         chmod +x ./aws-iam-authenticator
         mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
         aws-iam-authenticator help     
         echo ${KUBE_CONFIG_DATA} | base64 -d > kubeconfig
         export KUBECONFIG=kubeconfig
-        # Deploy pods
-        kubectl apply -f  $GITHUB_WORKSPACE/deploy/kubernetes/admin_frontend_deploy.yaml
-        kubectl apply -f  ./deploy/kubernetes/cart_db_deploy.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/cart_microservice_deploy.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/orders_db_deploy.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/orders_microservice_deploy.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/product_db_deploy.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/product_microservice_deploy.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/web_frontend_deploy.yaml
-        # Deploy services
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/admin_frontend_service.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/cart_db_service.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/cart_microservice_service.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/orders_db_service.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/orders_microservice_service.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/product_db_service.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/product_microservice_service.yaml
-        kubectl apply -f  https://raw.githubusercontent.com/k8tan/frothly_store/master/deploy/kubernetes/web_frontend_service.yaml
+        # Deploy pods and services from folder of yaml files
+        kubectl apply -f  ./deploy/kubernetes/

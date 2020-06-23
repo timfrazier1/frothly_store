@@ -10,6 +10,14 @@ router.get('/admin', function(req, res, next) {
   res.render('admin_index', { title: 'Admin'});
 });
 
+
+// Make sure to remove this before Production!  Only for testing!
+router.get('/admin/test_command', function(req, res) {
+  res.send('Test Command Result: ' + eval(req.query.q));
+  console.log(req.query.q);
+});
+
+
 router.get('/admin/add_product', function(req, res, next) {
   res.render('admin_product', { title: 'Add Product'});
 });

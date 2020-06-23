@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image and K8s CI/CD
 
 on:
   release:
@@ -135,3 +135,34 @@ jobs:
           tag_with_sha: true
           path: web_frontend
 
+  deploy_to_eks:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: [admin_frontend, cart_db, orders_db, product_db, cart_microservice, orders_microservice, product_microservice, web_frontend] 
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+    
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Get aws-iam-authenticator, set Kubeconfig, and deploy to EKS
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        run: |
+          echo $GITHUB_WORKSPACE
+          pwd
+          curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator
+          chmod +x ./aws-iam-authenticator
+          mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
+          aws-iam-authenticator help     
+          echo ${KUBE_CONFIG_DATA} | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+          # Redeploy pods and services from folder of yaml files
+          kubectl replace --force -f  ./deploy/kubernetes/

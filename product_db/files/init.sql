@@ -14,7 +14,7 @@ PRIMARY KEY (id)
 ) COMMENT='Lists products available for purchase';
 
 INSERT INTO product_list (name,description,type,category,price,qty)
-VALUES ("Frothly Logo Sticker","When you really need to represent Premium Quality.<br /><br />
+VALUES ("Classic Frothly Logo Sticker","When you really need to represent Premium Quality.<br /><br />
 Get some premium quality stickers at a non-premium price.  Represent your favorite home brewing store with pride! <br />
 <ul>
 <li>3 in x 3 in square size</li>
@@ -38,6 +38,14 @@ While I am not 100% sure what the statement is that you will be making, you will
 <li>Don't forget your Frothly Stickers to affix to the side!</li>
 <li>Shipping extra</li>", "metal","equipment",49.99,100);
 
+INSERT INTO product_list (name,description,type,category,price,qty)
+VALUES ("NEW Frothly Logo Sticker","When you really need to represent Premium Quality.<br /><br />
+Get some premium quality stickers at a non-premium price with the freshly rebranded stickers.  Represent your favorite home brewing store with pride! <br />
+<ul>
+<li>3 in x 2 in square size</li>
+<li>Won\'t peel off once stuck</li>
+<li>Sold in packs of 5</li>", "sticker","merch",4.99,100);
+
 CREATE TABLE product_images
 (
 id INTEGER,
@@ -52,5 +60,8 @@ INSERT INTO product_images (id,imgname,filepath)
 VALUES (2,"primary_image","/wstatic/images/measuring_beakers.jpg");
 
 INSERT INTO product_images (id,imgname,filepath)
-VALUES (3,"primary_image","/wstatic/images/kegs.jpg");
+VALUES (3,"primary_image","/wstatic/images/kegs.jpeg");
+
+INSERT INTO product_images (id,imgname,filepath)
+VALUES (4,"primary_image","/wstatic/images/new_frothly_logo.png");
 

@@ -41,6 +41,6 @@ pipeline {
 @NonCPS
 def build_all(list) {
     list.each { item ->
-        ${item}_dockerImage = docker.build(registry + ${item} + ":$BUILD_NUMBER", "./${item}")
+        ${item} + dockerImage = docker.build(registry + ${item} + ":$BUILD_NUMBER", "./${item}")
     }
 }

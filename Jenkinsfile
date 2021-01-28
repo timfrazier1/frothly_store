@@ -2,7 +2,6 @@ pipeline {
     environment {
         registry = "k8tan/"
         container = "admin_frontend"
-        all_containers = ['admin_frontend', 'web_frontend']
         registryCredential = 'e29c9663-c835-415c-8a2b-1b8a23ae9583'
         dockerImage = ''
     }

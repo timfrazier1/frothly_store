@@ -2,6 +2,7 @@ pipeline {
     environment {
         registry = "k8tan/"
         container = "admin_frontend"
+        all_containers = ['admin_frontend', 'web_frontend']
         registryCredential = 'e29c9663-c835-415c-8a2b-1b8a23ae9583'
         dockerImage = ''
     }
@@ -12,10 +13,11 @@ pipeline {
                 git 'https://github.com/k8tan/frothly_store'
             }
         }
-        stage('Building our admin_frontend image') {
+        stage('Building our docker images') {
             steps{
                 script {
-                    dockerImage = docker.build(registry + container + ":$BUILD_NUMBER", "./$container")
+                    build_all(all_containers);
+                    // dockerImage = docker.build(registry + container + ":$BUILD_NUMBER", "./$container")
                 }
             }
         }
@@ -33,5 +35,12 @@ pipeline {
                 sh "docker rmi $registry$container:$BUILD_NUMBER"
             }
         }
+    }
+}
+
+@NonCPS
+def build_all(list) {
+    list.each { item ->
+        ${item}_dockerImage = docker.build(registry + ${item} + ":$BUILD_NUMBER", "./${item}")
     }
 }

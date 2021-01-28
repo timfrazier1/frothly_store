@@ -33,7 +33,8 @@ pipeline {
         }
         stage('Cleaning up') {
             steps{
-                sh "docker rmi $registry$container:$BUILD_NUMBER"
+                sh "docker rmi k8tan/web_frontend:$BUILD_NUMBER"
+                sh "docker rmi k8tan/admin_frontend:$BUILD_NUMBER"
             }
         }
     }

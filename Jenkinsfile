@@ -16,8 +16,9 @@ pipeline {
         stage('Building our docker images') {
             steps{
                 script {
-                    build_all(all_containers);
-                    // dockerImage = docker.build(registry + container + ":$BUILD_NUMBER", "./$container")
+                    // build_all(all_containers);
+                    admin_frontend_dockerImage = docker.build(registry + "admin_frontend:$BUILD_NUMBER", "./admin_frontend")
+                    web_frontend_dockerImage = docker.build(registry + "web_frontend:$BUILD_NUMBER", "./web_frontend")
                 }
             }
         }
@@ -25,7 +26,8 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-                        dockerImage.push()
+                        admin_frontend_dockerImage.push()
+                        web_frontend_dockerImage.push()
                     }
                 }
             }
@@ -38,9 +40,11 @@ pipeline {
     }
 }
 
+/*
 @NonCPS
 def build_all(list) {
     list.each { item ->
         ${item} + dockerImage = docker.build(registry + ${item} + ":$BUILD_NUMBER", "./${item}")
     }
 }
+*/

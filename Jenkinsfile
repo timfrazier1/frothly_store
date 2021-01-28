@@ -15,7 +15,7 @@ git 'https://github.com/k8tan/frothly_store'
 stage('Building our admin_frontend image') {
 steps{
 script {
-dockerImage = docker.build(registry + container + ":$BUILD_NUMBER", "./admin_frontend")
+dockerImage = docker.build(registry + container + ":$BUILD_NUMBER", "./$container")
 }
 }
 }
@@ -30,7 +30,7 @@ dockerImage.push()
 }
 stage('Cleaning up') {
 steps{
-sh "docker rmi $registry:$BUILD_NUMBER"
+sh "docker rmi $registry$container:$BUILD_NUMBER"
 }
 }
 }

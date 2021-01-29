@@ -64,7 +64,7 @@ pipeline {
         stage('Re-deploy fresh images to Kubernetes') {
             steps{
                 withKubeConfig([credentialsId: 'file-kubeconfig-frothly-eks']) {
-                    sh 'kubectl get nodes'
+                    sh './kubectl get nodes'
                 }
             }
         }

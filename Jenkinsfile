@@ -56,9 +56,9 @@ pipeline {
         }
         stage('Install kubectl') {
             steps {
-                sh "curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.12/2020-11-02/bin/linux/amd64/kubectl"
+                sh "curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.15/2020-11-02/bin/linux/amd64/kubectl"
                 sh "chmod +x ./kubectl"
-                sh "sudo mv ./kubectl /usr/local/bin/kubectl"
+                // sh "sudo mv ./kubectl /usr/local/bin/kubectl"
             }
         }
         stage('Re-deploy fresh images to Kubernetes') {

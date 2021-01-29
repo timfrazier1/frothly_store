@@ -4,11 +4,7 @@ pipeline {
         registryCredential = 'e29c9663-c835-415c-8a2b-1b8a23ae9583'
         dockerImage = ''
     }
-    agent {
-        docker {
-            image 'bearengineer/awscli-kubectl'
-        }
-    }
+    agent any
     stages {
         stage('Cloning Frothly Store Git') {
             steps {
@@ -60,14 +56,16 @@ pipeline {
         }
         stage('Install K8s tools and deploy container images') {
             steps {
-                withKubeConfig([credentialsId: 'file-kubeconfig-frothly-eks']) {
-                    sh "curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator"
-                    sh "chmod +x ./aws-iam-authenticator"
-                    sh "mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin"
-                    // sh "curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.15/2020-11-02/bin/linux/amd64/kubectl"
-                    // sh "chmod +x ./kubectl"
-                    // sh "cp ./kubectl $HOME/bin/kubectl"
-                    sh "kubectl get nodes"
+                script {
+                    withKubeConfig([credentialsId: 'file-kubeconfig-frothly-eks']) {
+                        curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator
+                        chmod +x ./aws-iam-authenticator
+                        mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
+                        curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.15/2020-11-02/bin/linux/amd64/kubectl
+                        chmod +x ./kubectl
+                        cp ./kubectl $HOME/bin/kubectl
+                        kubectl get nodes
+                    }
                 }
             }
         }

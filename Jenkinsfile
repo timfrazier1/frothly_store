@@ -6,12 +6,12 @@ pipeline {
     }
     agent any
     stages {
-        stage('Cloning our Git') {
+        stage('Cloning Frothly Store Git') {
             steps {
                 git 'https://github.com/k8tan/frothly_store'
             }
         }
-        stage('Building our docker images') {
+        stage('Building the docker images for all services') {
             steps{
                 script {
                     // build_all(all_containers);
@@ -26,7 +26,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy our image') {
+        stage('Push Docker Images to DockerHub') {
             steps{
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
@@ -42,7 +42,7 @@ pipeline {
                 }
             }
         }
-        stage('Cleaning up') {
+        stage('Cleaning up docker images') {
             steps{
                 sh "docker rmi k8tan/web_frontend:$BUILD_NUMBER"
                 sh "docker rmi k8tan/admin_frontend:$BUILD_NUMBER"
@@ -52,6 +52,12 @@ pipeline {
                 sh "docker rmi k8tan/orders_microservice:$BUILD_NUMBER"
                 sh "docker rmi k8tan/product_db:$BUILD_NUMBER"
                 sh "docker rmi k8tan/product_microservice:$BUILD_NUMBER"
+            }
+        }
+        stage('Re-deploy fresh images to Kubernetes') {
+            steps{
+                withKubeConfig([credentialsId: 'kubeconfig-frothly-eks']) {
+                    sh 'kubectl get nodes'
             }
         }
     }

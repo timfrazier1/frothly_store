@@ -58,6 +58,7 @@ pipeline {
             steps{
                 withKubeConfig([credentialsId: 'kubeconfig-frothly-eks']) {
                     sh 'kubectl get nodes'
+                }
             }
         }
     }

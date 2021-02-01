@@ -58,7 +58,7 @@ pipeline {
                 sh "docker rmi k8tan/product_microservice:$BUILD_NUMBER"
             }
         }
-        stage('Install K8s tools and deploy container images') {
+        stage('Deploy container images to Frothly EKS cluster') {
             agent {
                 docker {
                     image 'jshimko/kube-tools-aws'
@@ -67,10 +67,8 @@ pipeline {
         steps {
                 withAWS(credentials: 'aws-key', region: 'us-east-1') {
                     withKubeConfig([credentialsId: 'file-kubeconfig-frothly-eks']) {
-                        sh "kubectl get nodes"
-                        sh "ls -al"
-                        sh "cd ./deploy/kubernetes"
-                        sh "ls -al"
+                        // sh "kubectl get nodes"
+                        sh "kubectl replace --force -f  ./deploy/kubernetes/" 
                     }
                 }
             }

@@ -4,18 +4,16 @@ pipeline {
         registryCredential = 'e29c9663-c835-415c-8a2b-1b8a23ae9583'
         dockerImage = ''
     }
-    agent {
-        docker {
-            image 'jshimko/kube-tools-aws'
-        }
-    }
+    agent none 
     stages {
         stage('Cloning Frothly Store Git') {
+            agent any
             steps {
                 git 'https://github.com/k8tan/frothly_store'
             }
         }
         stage('Building the docker images for all services') {
+            agent any
             steps{
                 script {
                     // build_all(all_containers);
@@ -31,6 +29,7 @@ pipeline {
             }
         }
         stage('Push Docker Images to DockerHub') {
+            agent any
             steps{
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
@@ -47,6 +46,7 @@ pipeline {
             }
         }
         stage('Cleaning up docker images') {
+            agent any
             steps{
                 sh "docker rmi k8tan/web_frontend:$BUILD_NUMBER"
                 sh "docker rmi k8tan/admin_frontend:$BUILD_NUMBER"
@@ -59,7 +59,12 @@ pipeline {
             }
         }
         stage('Install K8s tools and deploy container images') {
-            steps {
+            agent {
+                docker {
+                    image 'jshimko/kube-tools-aws'
+                }
+            }   
+        steps {
                 withKubeConfig([credentialsId: 'file-kubeconfig-frothly-eks']) {
                     // sh "curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator"
                     // sh "chmod +x ./aws-iam-authenticator"

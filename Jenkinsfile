@@ -72,6 +72,8 @@ pipeline {
                     // sh "curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.15/2020-11-02/bin/linux/amd64/kubectl"
                     // sh "chmod +x ./kubectl"
                     // sh "cp ./kubectl $HOME/bin/kubectl"
+                    sh "which aws-iam-authenticator"
+                    sh "aws-iam-authenticator help"
                     sh "kubectl get nodes"
                 }
             }

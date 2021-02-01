@@ -3,20 +3,20 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: ordersservice
-  namespace: buttercup-store
+  namespace: frothly-store
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: buttercup-store
+        app: frothly-store
         name: ordersservice
         role: ordersservice
         tier: middleware
     spec:
       containers:
         - name: ordersservice
-          image: derkkila/orders_microservice
+          image: k8tan/orders_microservice
           imagePullPolicy: Always
           ports:
             - name: ordersservice

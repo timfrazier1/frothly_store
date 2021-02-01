@@ -3,9 +3,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: productservice
-  namespace: buttercup-store
+  namespace: frothly-store
   labels:
-    app: buttercup-store
+    app: frothly-store
     tier: middleware
 spec:
     #type: LoadBalancer
@@ -24,9 +24,9 @@ spec:
 #kind: Service
 #metadata:
 #  name:  productservice 
-#  namespace: buttercup-store
+#  namespace: frothly-store
 #  labels:
-#    app: buttercup-store
+#    app: frothly-store
 #    tier: middleware
 #spec:
 #  type: LoadBalancer

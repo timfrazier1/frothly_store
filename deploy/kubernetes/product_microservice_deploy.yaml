@@ -3,20 +3,20 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: productservice 
-  namespace: buttercup-store
+  namespace: frothly-store
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: buttercup-store
+        app: frothly-store
         name: productservice
         role: productservice
         tier: middleware 
     spec:
       containers:
         - name: productservice
-          image: derkkila/product_microservice
+          image: k8tan/product_microservice
           imagePullPolicy: Always
           ports:
             - name: productservice

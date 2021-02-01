@@ -67,15 +67,10 @@ pipeline {
         steps {
                 withAWS(credentials: 'aws-key', region: 'us-east-1') {
                     withKubeConfig([credentialsId: 'file-kubeconfig-frothly-eks']) {
-                        // sh "curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator"
-                        // sh "chmod +x ./aws-iam-authenticator"
-                        // sh "mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin"
-                        // sh "curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.15/2020-11-02/bin/linux/amd64/kubectl"
-                        // sh "chmod +x ./kubectl"
-                        // sh "cp ./kubectl $HOME/bin/kubectl"
-                        sh "which aws-iam-authenticator"
-                        sh "aws-iam-authenticator help"
                         sh "kubectl get nodes"
+                        sh "ls -al"
+                        sh "cd ./deploy/kubernetes"
+                        sh "ls -al"
                     }
                 }
             }

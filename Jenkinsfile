@@ -68,7 +68,7 @@ pipeline {
                 withAWS(credentials: 'aws-key', region: 'us-east-1') {
                     withKubeConfig([credentialsId: 'file-kubeconfig-frothly-eks']) {
                         // sh "kubectl get nodes"
-                        sh "kubectl replace -l name=$BUILD_NUMBER --force -f ./deploy/kubernetes/" 
+                        sh "kubectl replace --force -f ./deploy/kubernetes/" 
                         sh "kubectl get pods -n frothly-store -o wide"
                     }
                 }

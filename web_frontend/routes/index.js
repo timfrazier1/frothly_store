@@ -123,10 +123,4 @@ router.get('/shop/:id', function(req, res, next) {
   });
 });
 
-// Make sure to remove this before Production!  Only for testing!
-router.get('/shop/test_command', function(req, res) {
-  res.send('Test Command Result: ' + eval(req.query.q));
-  console.log(req.query.q);
-});
-
 module.exports = router;

@@ -1,7 +1,7 @@
 pipeline {
     environment {
-        registry = "k8tan/"
-        registryCredential = 'e29c9663-c835-415c-8a2b-1b8a23ae9583'
+        registry = "timfrazier1/"
+        registryCredential = 'docker_hub'
         dockerImage = ''
     }
     agent none 
@@ -9,7 +9,7 @@ pipeline {
         stage('Cloning Frothly Store Git') {
             agent any
             steps {
-                git 'https://github.com/k8tan/frothly_store'
+                git 'https://github.com/timfrazier1/frothly_store'
             }
         }
         stage('Building the docker images for all services') {
@@ -48,14 +48,14 @@ pipeline {
         stage('Cleaning up docker images') {
             agent any
             steps{
-                sh "docker rmi k8tan/web_frontend:$BUILD_NUMBER"
-                sh "docker rmi k8tan/admin_frontend:$BUILD_NUMBER"
-                sh "docker rmi k8tan/cart_db:$BUILD_NUMBER"
-                sh "docker rmi k8tan/cart_microservice:$BUILD_NUMBER"
-                sh "docker rmi k8tan/orders_db:$BUILD_NUMBER"
-                sh "docker rmi k8tan/orders_microservice:$BUILD_NUMBER"
-                sh "docker rmi k8tan/product_db:$BUILD_NUMBER"
-                sh "docker rmi k8tan/product_microservice:$BUILD_NUMBER"
+                sh "docker rmi timfrazier1/web_frontend:$BUILD_NUMBER"
+                sh "docker rmi timfrazier1/admin_frontend:$BUILD_NUMBER"
+                sh "docker rmi timfrazier1/cart_db:$BUILD_NUMBER"
+                sh "docker rmi timfrazier1/cart_microservice:$BUILD_NUMBER"
+                sh "docker rmi timfrazier1/orders_db:$BUILD_NUMBER"
+                sh "docker rmi timfrazier1/orders_microservice:$BUILD_NUMBER"
+                sh "docker rmi timfrazier1/product_db:$BUILD_NUMBER"
+                sh "docker rmi timfrazier1/product_microservice:$BUILD_NUMBER"
             }
         }
         stage('Deploy container images to Frothly EKS cluster') {
@@ -67,9 +67,9 @@ pipeline {
         steps {
                 withAWS(credentials: 'aws-key', region: 'us-east-1') {
                     withKubeConfig([credentialsId: 'file-kubeconfig-frothly-eks']) {
-                        // sh "kubectl get nodes"
-                        sh "kubectl replace --force -f ./deploy/kubernetes/" 
-                        sh "kubectl get pods -n frothly-store -o wide"
+                        sh "kubectl get nodes"
+                        // sh "kubectl replace --force -f ./deploy/kubernetes/" 
+                        // sh "kubectl get pods -n frothly-store -o wide"
                     }
                 }
             }

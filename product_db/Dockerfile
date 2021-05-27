@@ -1,4 +1,4 @@
-FROM mysql
+FROM mysql/mysql-server
 MAINTAINER  (me) <email>
 
 # Copy the database schema to the /data directory

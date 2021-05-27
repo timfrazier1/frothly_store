@@ -1,6 +1,7 @@
 package services
 import (
-"./mux-master"
+// "./mux-master"
+"github.com/gorilla/mux"
 )
 // Function that returns a pointer to a mux.Router we can use as a handler.
 func NewRouter() *mux.Router {

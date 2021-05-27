@@ -1,14 +1,18 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webfrontend
   namespace: frothly-store
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: webfrontend
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: webfrontend
         app: frothly-store
         name: webfrontend
         role: webfrontend
@@ -16,8 +20,9 @@ spec:
     spec:
       containers:
         - name: webfrontend
-          image: k8tan/web_frontend
+          image: timfrazier1/web_frontend
           imagePullPolicy: Always
           ports:
             - name: webfrontend
               containerPort: 8088
+

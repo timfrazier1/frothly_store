@@ -2,11 +2,12 @@ package services
 import (
   "net/http"
   "database/sql"
-  _ "./mysql"
+  _ "cartservice/services/mysql"
   "log"
   "fmt"
   "encoding/json"
-  "./mux-master"
+//  "cartservice/services/mux-master"
+  "github.com/gorilla/mux"
 )
 
 // Defines a single route, e.g. a human readable name, HTTP method and the

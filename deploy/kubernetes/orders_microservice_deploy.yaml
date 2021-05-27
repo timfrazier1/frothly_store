@@ -1,14 +1,18 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ordersservice
   namespace: frothly-store
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ordersservice
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: ordersservice
         app: frothly-store
         name: ordersservice
         role: ordersservice
@@ -16,8 +20,9 @@ spec:
     spec:
       containers:
         - name: ordersservice
-          image: k8tan/orders_microservice
+          image: timfrazier1/orders_microservice
           imagePullPolicy: Always
           ports:
             - name: ordersservice
               containerPort: 4201
+

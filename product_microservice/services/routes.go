@@ -2,11 +2,12 @@ package services
 import (
   "net/http"
   "database/sql"
-  _ "./mysql"
+  // _ "./mysql"
   "log"
   "fmt"
   "encoding/json"
-  "./mux-master"
+  //"./mux-master"
+  "github.com/gorilla/mux"
   "strings"
 )
 

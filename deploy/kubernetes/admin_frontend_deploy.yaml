@@ -1,14 +1,18 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adminfrontend
   namespace: frothly-store
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: admin_frontend
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: admin_frontend
         app: frothly-store
         name: adminfrontend
         role: adminfrontend
@@ -16,7 +20,7 @@ spec:
     spec:
       containers:
         - name: adminfrontend
-          image: k8tan/admin_frontend
+          image: timfrazier1/admin_frontend
           imagePullPolicy: Always
           ports:
             - name: adminfrontend

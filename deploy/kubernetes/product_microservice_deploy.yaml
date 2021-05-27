@@ -1,22 +1,26 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: productservice 
+  name: productservice
   namespace: frothly-store
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: productservice
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: productservice
         app: frothly-store
         name: productservice
         role: productservice
-        tier: middleware 
+        tier: middleware
     spec:
       containers:
         - name: productservice
-          image: k8tan/product_microservice
+          image: timfrazier1/product_microservice
           imagePullPolicy: Always
           ports:
             - name: productservice

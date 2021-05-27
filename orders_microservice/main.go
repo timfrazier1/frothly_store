@@ -2,7 +2,7 @@
 package main
 import (
         "fmt"
-        "./services"  // NEW
+        "ordersservice/services"  // NEW
 )
 var appName = "ordersservice"
 func main() {

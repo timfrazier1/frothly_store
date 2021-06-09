@@ -1,5 +1,5 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ordersdb
@@ -8,9 +8,13 @@ metadata:
   namespace: frothly-store
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ordersdb
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: ordersdb
         app: frothly-store
         name: ordersdb
         role: mysql
@@ -18,9 +22,9 @@ spec:
     spec:
       containers:
         - name: ordersdb
-          #image: k8tan/product_db
           image: k8tan/orders_db
           imagePullPolicy: Always
           ports:
             - name: mysql
               containerPort: 3306
+

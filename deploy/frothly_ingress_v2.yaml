@@ -1,0 +1,77 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"extensions/v1beta1","kind":"Ingress","metadata":{"annotations":{"kubernetes.io/ingress.class":"nginx"},"name":"frothly-ingress","namespace":"frothly-store"},"spec":{"rules":[{"host":null,"http":{"paths":[{"backend":{"serviceName":"webfrontend","servicePort":8088},"path":"/"},{"backend":{"serviceName":"webfrontend","servicePort":8088},"path":"/shop"},{"backend":{"serviceName":"webfrontend","servicePort":8088},"path":"/wstatic"},{"backend":{"serviceName":"adminfrontend","servicePort":3000},"path":"/admin"},{"backend":{"serviceName":"adminfrontend","servicePort":3000},"path":"/astatic"},{"backend":{"serviceName":"cartservice","servicePort":4201},"path":"/cart"},{"backend":{"serviceName":"ordersservice","servicePort":4201},"path":"/orders"},{"backend":{"serviceName":"productservice","servicePort":6767},"path":"/products"}]}}]}}
+    kubernetes.io/ingress.class: nginx
+  generation: 2
+  name: frothly-ingress
+  namespace: frothly-store
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: webfrontend
+            port:
+              number: 8088
+        path: /
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: webfrontend
+            port:
+              number: 8088
+        path: /shop
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: webfrontend
+            port:
+              number: 8088
+        path: /wstatic
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: adminfrontend
+            port:
+              number: 3000
+        path: /admin
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: adminfrontend
+            port:
+              number: 3000
+        path: /astatic
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: cartservice
+            port:
+              number: 4201
+        path: /cart
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: ordersservice
+            port:
+              number: 4201
+        path: /orders
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: productservice
+            port:
+              number: 6767
+        path: /products
+        pathType: ImplementationSpecific
+status:
+  loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

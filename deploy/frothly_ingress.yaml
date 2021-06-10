@@ -33,8 +33,10 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: ghost
-          servicePort: 2368
+          serviceName: webfrontend
+          servicePort: 8088
+          # serviceName: ghost
+          # servicePort: 2368
       - path: /shop
         backend:
           serviceName: webfrontend

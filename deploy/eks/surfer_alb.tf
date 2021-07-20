@@ -97,3 +97,6 @@ resource "kubernetes_ingress" "surfer_ingress" {
   }
 }
 
+output "lb_ip" {
+  value = kubernetes_ingress.surfer_ingress.status.0.load_balancer.0.ingress.0.hostname
+}

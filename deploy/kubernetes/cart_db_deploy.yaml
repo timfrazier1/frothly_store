@@ -5,7 +5,7 @@ metadata:
   name: cartdb
   labels:
     name: cartdb
-  namespace: frothly-store
+  namespace: surfer-store
 spec:
   replicas: 1
   selector:
@@ -15,7 +15,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: cartdb
-        app: frothly-store
+        app: surfer-store
         name: cartdb
         role: mysql
         tier: db

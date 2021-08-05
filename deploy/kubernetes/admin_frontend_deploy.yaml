@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adminfrontend
-  namespace: frothly-store
+  namespace: surfer-store
 spec:
   replicas: 1
   selector:
@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: admin_frontend
-        app: frothly-store
+        app: surfer-store
         name: adminfrontend
         role: adminfrontend
         tier: client

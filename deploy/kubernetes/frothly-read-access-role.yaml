@@ -2,8 +2,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   # Namespace not needed for cluster role
-  # namespace: frothly-store
-  name: frothly-read-only-role
+  # namespace: surfer-store
+  name: surfer-read-only-role
 rules:
 - apiGroups: [""]
   #

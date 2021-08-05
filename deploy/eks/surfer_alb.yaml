@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: "surfer-ingress"
+  namespace: "surfer-store"
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    #alb.ingress.kubernetes.io/inbound-cidrs: 
+    # alb.ingress.kubernetes.io/security-groups: HttpOnlyEks,eksctl-frothly-test-cluster-ControlPlaneSecurityGroup-ZMT7VWOSXV07
+    # alb.ingress.kubernetes.io/security-groups: HttpOnlyEks,eksctl-frazier-store-cluster-ControlPlaneSecurityGroup-K1GUU8WB2JZF
+    alb.ingress.kubernetes.io/security-groups: 	sg-0575f4bd23e0e5d54,sg-031d5035c110cd690
+    # Have not tested this yet, but adding per spec:
+    # alb.ingress.kubernetes.io/load-balancer-attributes: access_logs.s3.enabled=true,access_logs.s3.bucket=frothly-store-access-logs    
+  labels:
+    app: surfer-store
+spec:
+  rules:
+  - http:
+      paths:
+        - backend:
+              serviceName: webfrontend
+              servicePort: 8088
+          path: /shop*
+        - backend:
+              serviceName: webfrontend
+              servicePort: 8088
+          path: /wstatic*
+        - backend:
+              serviceName: adminfrontend
+              servicePort: 3000
+          path: /admin*
+        - backend:
+              serviceName: adminfrontend
+              servicePort: 3000
+          path: /astatic*
+        - backend:
+              serviceName: cartservice
+              servicePort: 4201
+          path: /cart*
+        - backend:
+              serviceName: ordersservice
+              servicePort: 4201
+          path: /orders*
+        - backend:
+              serviceName: productservice
+              servicePort: 6767
+          path: /products*          
+        - backend:
+              serviceName: webfrontend
+              servicePort: 8088
+          path: /*
+#       - backend:
+#             serviceName: ghost
+#             servicePort: 2368
+#         path: /

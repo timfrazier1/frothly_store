@@ -5,7 +5,7 @@ metadata:
   name: ordersdb
   labels:
     name: ordersdb
-  namespace: frothly-store
+  namespace: surfer-store
 spec:
   replicas: 1
   selector:
@@ -15,7 +15,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: ordersdb
-        app: frothly-store
+        app: surfer-store
         name: ordersdb
         role: mysql
         tier: db
